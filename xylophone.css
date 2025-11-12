@@ -1,10 +1,21 @@
+:root {
+    --glow-color-rgb: 132, 0, 255;
+    --surface-dark: #060010;
+    --text-primary: #f5f5f7;
+}
+
 body {
     margin: 0;
-    padding: 40px;
-    background: radial-gradient(circle at top, #202533 0%, #0d0f18 60%, #06070d 100%);
-    font-family: Arial, sans-serif;
+    padding: 48px;
     min-height: 100vh;
-    color: #f2f2f2;
+    font-family: 'Inter', Arial, sans-serif;
+    color: var(--text-primary);
+    background:
+        radial-gradient(circle at 15% 20%, rgba(var(--glow-color-rgb), 0.25), transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(var(--glow-color-rgb), 0.18), transparent 50%),
+        radial-gradient(circle at 50% 110%, rgba(var(--glow-color-rgb), 0.12), transparent 45%),
+        linear-gradient(160deg, #04000c 0%, #020012 40%, #06001b 100%);
+    overflow-x: hidden;
 }
 
 .container {
@@ -50,6 +61,27 @@ body {
     filter: brightness(0.95);
 }
 
+.global-spotlight {
+    position: fixed;
+    width: 760px;
+    height: 760px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(
+        circle,
+        rgba(var(--glow-color-rgb), 0.22) 0%,
+        rgba(var(--glow-color-rgb), 0.12) 25%,
+        rgba(var(--glow-color-rgb), 0.05) 50%,
+        rgba(var(--glow-color-rgb), 0.02) 65%,
+        transparent 75%
+    );
+    mix-blend-mode: screen;
+    z-index: 120;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease;
+}
+
 h1 {
     color: #333;
     text-align: center;
@@ -59,15 +91,16 @@ h1 {
 .xylophone-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
+    align-items: center;
+    gap: 32px;
     margin: 0 auto;
+    position: relative;
 }
 
 .xylophone-row {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
 }
 
 .xylophone-key {
@@ -90,6 +123,10 @@ h1 {
     font-size: 20px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    --glow-x: 50%;
+    --glow-y: 50%;
+    --glow-radius: 220px;
+    --glow-intensity: 0;
 }
 
 .xylophone-key::after {
@@ -99,14 +136,42 @@ h1 {
     letter-spacing: 0.08em;
 }
 
+.xylophone-key::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: inherit;
+    background:
+        radial-gradient(
+            circle at var(--glow-x) var(--glow-y),
+            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.6)) 0%,
+            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.28)) 35%,
+            rgba(var(--glow-color-rgb), 0) 75%
+        );
+    opacity: clamp(0, var(--glow-intensity), 1);
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 0;
+}
+
 .xylophone-key:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
 }
 
 .xylophone-key.playing {
-    transform: translateY(-10px) scale(1.07);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    transform: scale(1.05);
+    box-shadow:
+        0 0 32px rgba(var(--glow-color-rgb), 0.35),
+        0 16px 32px rgba(0, 0, 0, 0.32),
+        inset 0 0 18px rgba(var(--glow-color-rgb), 0.55);
+}
+
+.xylophone-key.playing::before {
+    opacity: 1 !important;
+}
+
+.xylophone-key.playing::after {
+    color: rgba(50, 50, 50, 0.9);
 }
 
 .xylophone-key--drum {
@@ -118,11 +183,24 @@ h1 {
     color: #f3f3f3;
     border: 2px solid #121212;
     box-shadow: inset 0 3px 8px rgba(255, 255, 255, 0.16), 0 12px 28px rgba(0, 0, 0, 0.35);
+    letter-spacing: 0.18em;
+    --glow-intensity: 0;
 }
 
 .xylophone-key--drum::after {
     font-size: 15px;
     letter-spacing: 0.14em;
     color: #d0d0d0;
+}
+
+.xylophone-key--drum::before {
+    inset: -12px;
+    background:
+        radial-gradient(
+            circle at var(--glow-x) var(--glow-y),
+            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.85)) 0%,
+            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.4)) 35%,
+            rgba(var(--glow-color-rgb), 0) 78%
+        );
 }
 

@@ -11,27 +11,6 @@ const xylophoneColors = [
 ];
 
 const xylophoneFrequencies = [
-    523.25, // C5
-    587.33, // D5
-    659.25, // E5
-    698.46, // F5
-    783.99, // G5
-    880.0,  // A5
-    987.77  // B5
-];
-
-const numberNotes = [
-    'C5',
-    'D5',
-    'E5',
-    'F5',
-    'G5',
-    'A5',
-    'B5'
-];
-
-const letterKeys = ['q', 'w', 'e', 'r', 't', 'z', 'u'];
-const letterFrequencies = [
     261.63, // C4
     293.66, // D4
     329.63, // E4
@@ -41,7 +20,7 @@ const letterFrequencies = [
     493.88  // B4
 ];
 
-const letterNotes = [
+const numberNotes = [
     'C4',
     'D4',
     'E4',
@@ -51,10 +30,8 @@ const letterNotes = [
     'B4'
 ];
 
-const numberKeys = ['1', '2', '3', '4', '5', '6', '7'];
-
-const middleKeys = ['a', 's', 'd', 'f', 'g', 'h', 'j'];
-const middleFrequencies = [
+const letterKeys = ['q', 'w', 'e', 'r', 't', 'z', 'u'];
+const letterFrequencies = [
     130.81, // C3
     146.83, // D3
     164.81, // E3
@@ -64,7 +41,7 @@ const middleFrequencies = [
     246.94  // B3
 ];
 
-const middleNotes = [
+const letterNotes = [
     'C3',
     'D3',
     'E3',
@@ -72,6 +49,29 @@ const middleNotes = [
     'G3',
     'A3',
     'B3'
+];
+
+const numberKeys = ['1', '2', '3', '4', '5', '6', '7'];
+
+const middleKeys = ['a', 's', 'd', 'f', 'g', 'h', 'j'];
+const middleFrequencies = [
+    65.41,  // C2
+    73.42,  // D2
+    82.41,  // E2
+    87.31,  // F2
+    98.0,   // G2
+    110.0,  // A2
+    123.47  // B2
+];
+
+const middleNotes = [
+    'C2',
+    'D2',
+    'E2',
+    'F2',
+    'G2',
+    'A2',
+    'B2'
 ];
 
 const drumKeys = ['o', 'l', 'p', 'ö', 'ü', 'ä', '9', '0', '?'];
