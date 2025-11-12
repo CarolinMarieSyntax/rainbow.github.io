@@ -3,204 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RegenbogeXylophon</title>n 
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            background-color: #87CEEB; /* Himmelblau (Sky Blue) */
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .xylophone-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 8px;
-            margin: 40px 0;
-            height: 300px;
-        }
-        
-        .xylophone-key {
-            width: 60px;
-            background-color: #f0f0f0;
-            border: 2px solid #ddd;
-            border-radius: 8px 8px 0 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            font-weight: bold;
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .xylophone-key:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .xylophone-key.playing {
-            transform: translateY(-10px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .instructions {
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-            margin-top: 20px;
-        }
-        
-        /* Different heights for xylophone keys */
-        #key1 { height: 180px; }
-        #key2 { height: 170px; }
-        #key3 { height: 160px; }
-        #key4 { height: 150px; }
-        #key5 { height: 140px; }
-        #key6 { height: 130px; }
-        #key7 { height: 120px; }
-        #key8 { height: 110px; }
-    </style>
+    <title>Regenbogen-Xylophon</title>
+    <link rel="stylesheet" href="xylophone.css">
 </head>
 <body>
     <div class="container">
-        <h1>Regenbogen-Xylophon</h1>
-        <div class="xylophone-container">
-            <div class="xylophone-key" id="key1" data-note="1">1</div>
-            <div class="xylophone-key" id="key2" data-note="2">2</div>
-            <div class="xylophone-key" id="key3" data-note="3">3</div>
-            <div class="xylophone-key" id="key4" data-note="4">4</div>
-            <div class="xylophone-key" id="key5" data-note="5">5</div>
-            <div class="xylophone-key" id="key6" data-note="6">6</div>
-            <div class="xylophone-key" id="key7" data-note="7">7</div>
-            <div class="xylophone-key" id="key8" data-note="8">8</div>
+        <div class="controls">
+            <button id="sound-toggle" type="button">Sound: Electric Guitar</button>
         </div>
-        <p class="instructions">Drücke die Zahlen 1-8 oder klicke auf die Tasten um zu spielen!</p>
+        <div class="xylophone-container">
+            <div class="xylophone-row xylophone-row--numbers">
+                <div class="xylophone-key" data-group="numbers" data-key="1" data-note="C5">1</div>
+                <div class="xylophone-key" data-group="numbers" data-key="2" data-note="D5">2</div>
+                <div class="xylophone-key" data-group="numbers" data-key="3" data-note="E5">3</div>
+                <div class="xylophone-key" data-group="numbers" data-key="4" data-note="F5">4</div>
+                <div class="xylophone-key" data-group="numbers" data-key="5" data-note="G5">5</div>
+                <div class="xylophone-key" data-group="numbers" data-key="6" data-note="A5">6</div>
+                <div class="xylophone-key" data-group="numbers" data-key="7" data-note="B5">7</div>
+                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="9">9</div>
+                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="0">0</div>
+                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="?">?</div>
+            </div>
+            <div class="xylophone-row xylophone-row--letters">
+                <div class="xylophone-key" data-group="letters" data-key="q" data-note="C4">Q</div>
+                <div class="xylophone-key" data-group="letters" data-key="w" data-note="D4">W</div>
+                <div class="xylophone-key" data-group="letters" data-key="e" data-note="E4">E</div>
+                <div class="xylophone-key" data-group="letters" data-key="r" data-note="F4">R</div>
+                <div class="xylophone-key" data-group="letters" data-key="t" data-note="G4">T</div>
+                <div class="xylophone-key" data-group="letters" data-key="z" data-note="A4">Z</div>
+                <div class="xylophone-key" data-group="letters" data-key="u" data-note="B4">U</div>
+                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="o">O</div>
+                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="p">P</div>
+                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="ü">Ü</div>
+            </div>
+            <div class="xylophone-row xylophone-row--middle">
+                <div class="xylophone-key" data-group="middle" data-key="a" data-note="C3">A</div>
+                <div class="xylophone-key" data-group="middle" data-key="s" data-note="D3">S</div>
+                <div class="xylophone-key" data-group="middle" data-key="d" data-note="E3">D</div>
+                <div class="xylophone-key" data-group="middle" data-key="f" data-note="F3">F</div>
+                <div class="xylophone-key" data-group="middle" data-key="g" data-note="G3">G</div>
+                <div class="xylophone-key" data-group="middle" data-key="h" data-note="A3">H</div>
+                <div class="xylophone-key" data-group="middle" data-key="j" data-note="B3">J</div>
+                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="l">L</div>
+                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="ö">Ö</div>
+                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="ä">Ä</div>
+            </div>
+        </div>
     </div>
-    
-    <script>
-        // Xylophone colors array (Pastel)
-        const xylophoneColors = [
-            '#FFB3B3', // Pastel Red
-            '#FFD4B3', // Pastel Orange
-            '#FFFFB3', // Pastel Yellow
-            '#B3FFB3', // Pastel Green
-            '#B3D4FF', // Pastel Blue
-            '#D4B3FF', // Pastel Indigo
-            '#FFB3FF', // Pastel Violet
-            '#FFB3D4'  // Pastel Pink
-        ];
-        
-        // Rainbow-like musical frequencies (C major scale)
-        const xylophoneFrequencies = [
-            261.63, // C4 (Red)
-            293.66, // D4 (Orange)
-            329.63, // E4 (Yellow)
-            349.23, // F4 (Green)
-            392.00, // G4 (Blue)
-            440.00, // A4 (Indigo)
-            493.88, // B4 (Violet)
-            523.25  // C5 (Pink)
-        ];
-        
-        // Create audio context
-        let audioContext;
-        
-        // Function to initialize audio context (needed for user interaction)
-        function initAudio() {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            }
-        }
-        
-        // Function to play a musical tone
-        function playTone(frequency, duration = 0.5) {
-            if (!audioContext) return;
-            
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            // Set up the tone
-            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-            oscillator.type = 'sine'; // Smooth, xylophone-like sound
-            
-            // Create envelope for natural sound
-            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
-            
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + duration);
-        }
-        
-        // Function to play xylophone key
-        function playXylophoneKey(number) {
-            if (number >= 1 && number <= 8) {
-                const key = document.getElementById(`key${number}`);
-                const colorIndex = number - 1;
-                
-                // Initialize audio on first interaction
-                initAudio();
-                
-                // Apply the color and visual feedback
-                key.style.backgroundColor = xylophoneColors[colorIndex];
-                key.classList.add('playing');
-                
-                // Play the musical tone
-                playTone(xylophoneFrequencies[colorIndex], 0.5);
-                
-                // Remove the color and effect after 0.5 seconds
-                setTimeout(() => {
-                    key.style.backgroundColor = '#f0f0f0';
-                    key.classList.remove('playing');
-                }, 500);
-                
-                console.log(`Key ${number} played: ${xylophoneColors[colorIndex]} at ${xylophoneFrequencies[colorIndex]}Hz`);
-            }
-        }
-        
-        // Event listener for keyboard input
-        document.addEventListener('keydown', function(event) {
-            const key = event.key;
-            
-            // Check if the pressed key is a number from 1-8
-            if (key >= '1' && key <= '8') {
-                playXylophoneKey(parseInt(key));
-            }
-        });
-        
-        // Event listener for clicking on xylophone keys
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('xylophone-key')) {
-                const note = event.target.getAttribute('data-note');
-                playXylophoneKey(parseInt(note));
-            }
-        });
-    </script>
+    <script src="xylophone.js" defer></script>
 </body>
 </html>
