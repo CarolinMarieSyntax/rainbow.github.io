@@ -7,10 +7,25 @@
     <link rel="stylesheet" href="xylophone.css">
 </head>
 <body>
-    <div class="container">
-        <div class="controls">
+    <nav class="nav-bar">
+        <div class="nav-content">
             <button id="sound-toggle" type="button">Sound: Electric Guitar</button>
+            <button id="record-btn" type="button">Record</button>
+            <button class="loop-btn" data-loop="1" type="button">
+                Loop 1
+                <span class="loop-clear" data-loop="1">×</span>
+            </button>
+            <button class="loop-btn" data-loop="2" type="button">
+                Loop 2
+                <span class="loop-clear" data-loop="2">×</span>
+            </button>
+            <button class="loop-btn" data-loop="3" type="button">
+                Loop 3
+                <span class="loop-clear" data-loop="3">×</span>
+            </button>
         </div>
+    </nav>
+    <div class="container">
         <div class="xylophone-container">
             <div class="xylophone-row xylophone-row--numbers">
                 <div class="xylophone-key" data-group="numbers" data-key="1" data-note="C4">1</div>
@@ -22,7 +37,7 @@
                 <div class="xylophone-key" data-group="numbers" data-key="7" data-note="B4">7</div>
                 <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="9">9</div>
                 <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="0">0</div>
-                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="?">?</div>
+                <div class="xylophone-key xylophone-key--drum" data-group="drums" data-key="ß">?</div>
             </div>
             <div class="xylophone-row xylophone-row--letters">
                 <div class="xylophone-key" data-group="letters" data-key="q" data-note="C3">Q</div>

@@ -74,17 +74,17 @@ const middleNotes = [
     'B2'
 ];
 
-const drumKeys = ['o', 'l', 'p', 'ö', 'ü', 'ä', '9', '0', '?'];
+const drumKeys = ['o', 'l', 'p', 'ö', 'ü', 'ä', '9', '0', 'ß'];
 const drumFrequencies = [
-    60,   // Kick
-    78,   // Floor Tom
-    96,   // Rack Tom
-    115,  // Snare
-    130,  // Clap
-    145,  // Hat
-    165,  // Crash
-    190,  // Ride
-    210   // Perc
+    78,   // o - Floor Tom (swapped from l)
+    60,   // l - Kick (swapped from o)
+    115,  // p - Snare (swapped from ö)
+    96,   // ö - Rack Tom (swapped from p)
+    145,  // ü - Hat (swapped from ä)
+    130,  // ä - Clap (swapped from ü)
+    165,  // 9 - Crash
+    190,  // 0 - Ride
+    210   // ß - Perc
 ];
 
 const drumNotes = [
@@ -125,39 +125,39 @@ const keyGroups = {
 const drumOverride = {
     oscillatorType: 'sine',
     harmonicsType: 'sine',
-    harmonicMultiplier: 1,
+    harmonicMultiplier: 0.5,
     harmonicDetune: 0,
-    harmonicDetuneEnd: -4,
-    harmonicStartRatio: 0.98,
-    harmonicSettleTime: 0.06,
-    initialPitchRatio: 0.98,
-    pitchSettleTime: 0.06,
+    harmonicDetuneEnd: 0,
+    harmonicStartRatio: 1.0,
+    harmonicSettleTime: 0.05,
+    initialPitchRatio: 1.0,
+    pitchSettleTime: 0.05,
     pitchDriftCents: 0,
-    vibratoFrequency: 2.2,
-    vibratoDepthRatio: 0.0015,
-    vibratoDepthEndRatio: 0.001,
-    noiseLevel: 1.0,
-    noiseDecay: 0.2,
-    distortionAmount: 320,
-    toneFrequencyMultiplier: 1.05,
-    toneFrequencyEndMultiplier: 0.68,
-    toneQ: 1.7,
-    cabinetHighLoss: -10,
-    resonanceFrequencyMultiplier: 1.05,
-    resonanceQ: 22,
-    resonanceGain: 0.72,
-    dryGain: 1.08,
+    vibratoFrequency: 0,
+    vibratoDepthRatio: 0,
+    vibratoDepthEndRatio: 0,
+    noiseLevel: 1.2,
+    noiseDecay: 0.15,
+    distortionAmount: 200,
+    toneFrequencyMultiplier: 0.8,
+    toneFrequencyEndMultiplier: 0.6,
+    toneQ: 2.0,
+    cabinetHighLoss: -2,
+    resonanceFrequencyMultiplier: 0.9,
+    resonanceQ: 12,
+    resonanceGain: 0.15,
+    dryGain: 0.3,
     reverbMix: 0.12,
-    tremoloFrequency: 4.6,
-    tremoloDepth: 0.08,
-    tremoloDecay: 0.05,
+    tremoloFrequency: 0,
+    tremoloDepth: 0,
+    tremoloDecay: 0,
     chorusDepth: 0,
     chorusDepthEnd: 0,
     chorusMix: 0,
-    masterGain: 1.05,
-    preampGain: 1.18,
-    envelope: { attack: 0.0018, peak: 1.12, decay: 0.14, sustain: 0.55, release: 0.0018 },
-    durations: { drums: 0.5 }
+    masterGain: 0.7,
+    preampGain: 0.75,
+    envelope: { attack: 0.001, peak: 1.2, decay: 0.08, sustain: 0.1, release: 0.002 },
+    durations: { drums: 0.3 }
 };
 
 const soundProfiles = [
@@ -186,7 +186,7 @@ const soundProfiles = [
         resonanceFrequencyMultiplier: 1.8,
         resonanceQ: 20,
         resonanceGain: 0.38,
-        dryGain: 0.28,
+        dryGain: 0.3,
         reverbMix: 0.4,
         tremoloFrequency: 7.2,
         tremoloDepth: 0.28,
@@ -196,8 +196,8 @@ const soundProfiles = [
         chorusDepthEnd: 0.0025,
         chorusRate: 0.9,
         chorusMix: 0.32,
-        masterGain: 0.68,
-        preampGain: 0.8,
+        masterGain: 0.7,
+        preampGain: 0.75,
         durations: { numbers: 0.45, letters: 0.6, middle: 0.65, drums: 0.38 },
         envelope: { attack: 0.006, peak: 0.85, decay: 0.08, sustain: 0.55, release: 0.0015 },
         groupOverrides: { drums: drumOverride }
@@ -227,7 +227,7 @@ const soundProfiles = [
         resonanceFrequencyMultiplier: 1.4,
         resonanceQ: 9,
         resonanceGain: 0.24,
-        dryGain: 0.25,
+        dryGain: 0.3,
         reverbMix: 0.65,
         tremoloFrequency: 4.2,
         tremoloDepth: 0.12,
@@ -237,7 +237,7 @@ const soundProfiles = [
         chorusDepthEnd: 0.006,
         chorusRate: 0.55,
         chorusMix: 0.5,
-        masterGain: 0.65,
+        masterGain: 0.7,
         preampGain: 0.75,
         durations: { numbers: 0.9, letters: 1.1, middle: 1.2, drums: 0.45 },
         envelope: { attack: 0.18, peak: 0.95, decay: 0.4, sustain: 0.8, release: 0.002 },
@@ -278,8 +278,8 @@ const soundProfiles = [
         chorusDepthEnd: 0.0022,
         chorusRate: 1.6,
         chorusMix: 0.28,
-        masterGain: 0.66,
-        preampGain: 0.78,
+        masterGain: 0.7,
+        preampGain: 0.75,
         durations: { numbers: 0.5, letters: 0.65, middle: 0.7, drums: 0.4 },
         envelope: { attack: 0.01, peak: 0.88, decay: 0.1, sustain: 0.5, release: 0.0018 },
         groupOverrides: { drums: drumOverride }
@@ -309,7 +309,7 @@ const soundProfiles = [
         resonanceFrequencyMultiplier: 1.3,
         resonanceQ: 10,
         resonanceGain: 0.22,
-        dryGain: 0.35,
+        dryGain: 0.3,
         reverbMix: 0.08,
         tremoloFrequency: 12,
         tremoloDepth: 0.16,
@@ -318,8 +318,8 @@ const soundProfiles = [
         chorusDepthEnd: 0,
         chorusRate: 1.2,
         chorusMix: 0,
-        masterGain: 0.62,
-        preampGain: 0.74,
+        masterGain: 0.7,
+        preampGain: 0.75,
         durations: { numbers: 0.35, letters: 0.4, middle: 0.45, drums: 0.32 },
         envelope: { attack: 0.004, peak: 0.9, decay: 0.05, sustain: 0.4, release: 0.0015 },
         groupOverrides: { drums: drumOverride }
@@ -349,7 +349,7 @@ const soundProfiles = [
         resonanceFrequencyMultiplier: 1.5,
         resonanceQ: 12,
         resonanceGain: 0.3,
-        dryGain: 0.32,
+        dryGain: 0.3,
         reverbMix: 0.5,
         tremoloFrequency: 5.8,
         tremoloDepth: 0.22,
@@ -359,8 +359,8 @@ const soundProfiles = [
         chorusDepthEnd: 0.004,
         chorusRate: 0.75,
         chorusMix: 0.42,
-        masterGain: 0.65,
-        preampGain: 0.76,
+        masterGain: 0.7,
+        preampGain: 0.75,
         durations: { numbers: 0.6, letters: 0.75, middle: 0.9, drums: 0.42 },
         envelope: { attack: 0.02, peak: 0.85, decay: 0.12, sustain: 0.65, release: 0.0018 },
         groupOverrides: { drums: drumOverride }
@@ -490,6 +490,30 @@ function getNoiseBuffer(context) {
     return noiseBuffer;
 }
 
+// Frequency-based loudness compensation (Fletcher-Munson curves)
+// Lower frequencies need more gain to sound equally loud
+function getFrequencyCompensation(frequency) {
+    // Reference frequency where human hearing is quite sensitive (~600 Hz)
+    const referenceFreq = 600;
+    
+    // Use logarithmic scale for smoother compensation curve
+    // Lower frequencies get progressively more boost
+    if (frequency < referenceFreq) {
+        // Logarithmic boost for lower frequencies
+        // At 65 Hz (C2): ~1.6x boost
+        // At 110 Hz (A2): ~1.5x boost  
+        // At 220 Hz (A3): ~1.3x boost
+        // At 440 Hz (A4): ~1.1x boost
+        const logRatio = Math.log2(frequency / referenceFreq);
+        return 1.0 - logRatio * 0.25;
+    } else {
+        // Slight reduction for very high frequencies
+        // At 600+ Hz, neutral to slight reduction
+        const logRatio = Math.log2(frequency / referenceFreq);
+        return 1.0 - logRatio * 0.1;
+    }
+}
+
 function playTone(frequency, duration = 0.5, profile = currentProfile) {
     if (!audioContext) {
         return;
@@ -497,6 +521,9 @@ function playTone(frequency, duration = 0.5, profile = currentProfile) {
 
     const now = audioContext.currentTime;
     const envelopeSettings = { ...defaultEnvelope, ...(profile.envelope || {}) };
+    
+    // Calculate frequency compensation
+    const freqCompensation = getFrequencyCompensation(frequency);
 
     const oscillator = audioContext.createOscillator();
     const harmonicsOsc = audioContext.createOscillator();
@@ -609,7 +636,10 @@ function playTone(frequency, duration = 0.5, profile = currentProfile) {
     const reverbMix = profile.reverbMix ?? 0.4;
     reverbWetGain.gain.setValueAtTime(reverbMix, now);
 
-    masterLimiter.gain.setValueAtTime(profile.masterGain ?? 0.82, now);
+    // Apply frequency compensation to master gain
+    const baseMasterGain = profile.masterGain ?? 0.82;
+    const compensatedMasterGain = baseMasterGain * freqCompensation;
+    masterLimiter.gain.setValueAtTime(compensatedMasterGain, now);
 
     tremolo.gain.setValueAtTime(1, now);
     const tremoloDepth = profile.tremoloDepth ?? 0.28;
@@ -738,7 +768,148 @@ function playTone(frequency, duration = 0.5, profile = currentProfile) {
     }
 }
 
-function playKey(groupName, keyValue) {
+// Recording and looping functionality
+let isRecording = false;
+let currentRecordingLoop = null;
+let recordingStartTime = 0;
+const loopRecordings = {
+    1: [],
+    2: [],
+    3: []
+};
+const loopIntervals = {
+    1: null,
+    2: null,
+    3: null
+};
+const loopStates = {
+    1: false,
+    2: false,
+    3: false
+};
+
+function recordEvent(groupName, keyValue) {
+    if (!isRecording || !currentRecordingLoop) return;
+    
+    const timestamp = Date.now() - recordingStartTime;
+    loopRecordings[currentRecordingLoop].push({
+        groupName,
+        keyValue,
+        timestamp
+    });
+}
+
+function startRecording(loopNumber) {
+    if (isRecording) {
+        stopRecording();
+    }
+    
+    isRecording = true;
+    currentRecordingLoop = loopNumber;
+    loopRecordings[loopNumber] = [];
+    recordingStartTime = Date.now();
+    
+    const recordBtn = document.getElementById('record-btn');
+    recordBtn.textContent = `Recording to Loop ${loopNumber}`;
+    recordBtn.classList.add('recording');
+    
+    updateLoopButtons();
+}
+
+function stopRecording() {
+    if (!isRecording) return;
+    
+    isRecording = false;
+    const recordBtn = document.getElementById('record-btn');
+    recordBtn.textContent = 'Record';
+    recordBtn.classList.remove('recording');
+    
+    if (currentRecordingLoop && loopRecordings[currentRecordingLoop].length > 0) {
+        const loopBtn = document.querySelector(`.loop-btn[data-loop="${currentRecordingLoop}"]`);
+        if (loopBtn) {
+            loopBtn.classList.add('has-recording');
+        }
+    }
+    
+    currentRecordingLoop = null;
+    updateLoopButtons();
+}
+
+function stopAllLoops() {
+    [1, 2, 3].forEach(loopNum => {
+        if (loopStates[loopNum]) {
+            stopLooping(loopNum);
+        }
+    });
+}
+
+function startLooping(loopNumber) {
+    if (loopRecordings[loopNumber].length === 0 || loopStates[loopNumber]) return;
+    
+    // Stop all other loops first
+    stopAllLoops();
+    
+    loopStates[loopNumber] = true;
+    const loopBtn = document.querySelector(`.loop-btn[data-loop="${loopNumber}"]`);
+    if (loopBtn) {
+        loopBtn.classList.add('looping');
+    }
+    
+    const events = loopRecordings[loopNumber];
+    const totalDuration = events.length > 0 
+        ? events[events.length - 1].timestamp + 1000 
+        : 2000;
+    
+    function playLoop() {
+        events.forEach(event => {
+            setTimeout(() => {
+                playKey(event.groupName, event.keyValue, true);
+            }, event.timestamp);
+        });
+    }
+    
+    playLoop();
+    loopIntervals[loopNumber] = setInterval(playLoop, totalDuration);
+}
+
+function stopLooping(loopNumber) {
+    if (!loopStates[loopNumber]) return;
+    
+    loopStates[loopNumber] = false;
+    if (loopIntervals[loopNumber]) {
+        clearInterval(loopIntervals[loopNumber]);
+        loopIntervals[loopNumber] = null;
+    }
+    
+    const loopBtn = document.querySelector(`.loop-btn[data-loop="${loopNumber}"]`);
+    if (loopBtn) {
+        loopBtn.classList.remove('looping');
+    }
+}
+
+function clearLoop(loopNumber) {
+    stopLooping(loopNumber);
+    loopRecordings[loopNumber] = [];
+    
+    const loopBtn = document.querySelector(`.loop-btn[data-loop="${loopNumber}"]`);
+    if (loopBtn) {
+        loopBtn.classList.remove('has-recording');
+    }
+}
+
+function updateLoopButtons() {
+    [1, 2, 3].forEach(loopNum => {
+        const loopBtn = document.querySelector(`.loop-btn[data-loop="${loopNum}"]`);
+        if (loopBtn) {
+            const hasRecording = loopRecordings[loopNum].length > 0;
+            if (!hasRecording) {
+                loopBtn.classList.remove('has-recording');
+            }
+        }
+    });
+}
+
+function playKey(groupName, keyValue, skipRecording = false) {
     const group = keyGroups[groupName];
     if (!group) {
         return;
@@ -754,6 +925,11 @@ function playKey(groupName, keyValue) {
         return;
     }
 
+    // Record the event if recording (unless playing from a loop)
+    if (!skipRecording) {
+        recordEvent(groupName, keyValue);
+    }
+
     initAudio();
 
     const highlightColor = xylophoneColors[index % xylophoneColors.length];
@@ -766,7 +942,7 @@ function playKey(groupName, keyValue) {
 
     const releaseDelay = Math.max(toneDuration * 1000, 350);
     setTimeout(() => {
-        keyElement.style.backgroundColor = KEY_BASE_COLOR;
+        keyElement.style.backgroundColor = '';
         keyElement.classList.remove('playing');
     }, releaseDelay);
 
@@ -800,6 +976,64 @@ document.addEventListener('click', (event) => {
         const keyValue = event.target.getAttribute('data-key');
         playKey(groupName, keyValue);
     }
+});
+
+// Record and Loop button event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    const recordBtn = document.getElementById('record-btn');
+    
+    // Record button - cycles through loops 1, 2, 3
+    if (recordBtn) {
+        recordBtn.addEventListener('click', () => {
+            if (isRecording) {
+                stopRecording();
+            } else {
+                // Find first available loop or use loop 1
+                let targetLoop = 1;
+                for (let i = 1; i <= 3; i++) {
+                    if (loopRecordings[i].length === 0) {
+                        targetLoop = i;
+                        break;
+                    }
+                }
+                startRecording(targetLoop);
+            }
+        });
+    }
+    
+    // Loop buttons - toggle play/stop for each loop
+    document.querySelectorAll('.loop-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // Don't trigger if clicking the clear button
+            if (e.target.classList.contains('loop-clear')) {
+                return;
+            }
+            
+            const loopNumber = parseInt(btn.getAttribute('data-loop'));
+            
+            if (isRecording && currentRecordingLoop === loopNumber) {
+                stopRecording();
+            } else if (loopStates[loopNumber]) {
+                stopLooping(loopNumber);
+            } else {
+                if (loopRecordings[loopNumber].length > 0) {
+                    startLooping(loopNumber);
+                } else if (!isRecording) {
+                    // If no recording, start recording to this loop
+                    startRecording(loopNumber);
+                }
+            }
+        });
+    });
+    
+    // Clear buttons (X)
+    document.querySelectorAll('.loop-clear').forEach(clearBtn => {
+        clearBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent triggering the loop button
+            const loopNumber = parseInt(clearBtn.getAttribute('data-loop'));
+            clearLoop(loopNumber);
+        });
+    });
 });
 
 if (document.readyState === 'loading') {

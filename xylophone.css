@@ -1,169 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 :root {
     --glow-color-rgb: 132, 0, 255;
-    --surface-dark: #060010;
-    --text-primary: #f5f5f7;
+    --accent-purple: #8c00ff;
+    --accent-pink: #ff00d4;
+    --accent-blue: #00d4ff;
+    --accent-cyan: #00ffd4;
+    --mint-green: #b8e6d8;
+    --mint-green-rgb: 184, 230, 216;
+    --mint-green-dark: #7fc4b0;
+    --mint-green-light: #d4f0e8;
+    --surface-light: #ffffff;
+    --surface-soft: #f8f9ff;
+    --text-primary: #1a1a2e;
+    --text-secondary: #6b7280;
+    --shadow-soft: rgba(132, 0, 255, 0.1);
+    --shadow-medium: rgba(132, 0, 255, 0.2);
+    --shadow-strong: rgba(132, 0, 255, 0.3);
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    padding: 48px;
+    padding: 0;
     min-height: 100vh;
-    font-family: 'Inter', Arial, sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: var(--text-primary);
-    background:
-        radial-gradient(circle at 15% 20%, rgba(var(--glow-color-rgb), 0.25), transparent 45%),
-        radial-gradient(circle at 85% 15%, rgba(var(--glow-color-rgb), 0.18), transparent 50%),
-        radial-gradient(circle at 50% 110%, rgba(var(--glow-color-rgb), 0.12), transparent 45%),
-        linear-gradient(160deg, #04000c 0%, #020012 40%, #06001b 100%);
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(132, 0, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 212, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 60%),
+        linear-gradient(135deg, #f8f9ff 0%, #ffffff 50%, #f0f4ff 100%);
     overflow-x: hidden;
+    position: relative;
+    padding-top: 80px;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(132, 0, 255, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 0, 212, 0.03) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(132, 0, 255, 0.1);
+    box-shadow: 0 4px 24px rgba(132, 0, 255, 0.08);
+}
+
+.nav-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    flex-wrap: wrap;
+}
+
+.nav-content #sound-toggle {
+    margin-right: 32px;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     background: none;
-    padding: 0;
+    padding: 32px 24px;
     border-radius: 0;
     box-shadow: none;
+    position: relative;
+    z-index: 1;
 }
 
 .controls {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 16px;
+    margin-bottom: 48px;
+    position: relative;
+    z-index: 2;
+}
+
+.nav-content button {
+    padding: 12px 28px;
+    background: #ffffff;
+    color: var(--mint-green-dark);
+    border: 2px solid var(--mint-green);
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 4px 16px rgba(var(--mint-green-rgb), 0.15),
+        0 2px 8px rgba(var(--mint-green-rgb), 0.1);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.nav-content button:hover:not(.recording):not(.looping):not(.has-recording) {
+    background: var(--mint-green);
+    color: #ffffff;
+    border-color: var(--mint-green);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+        0 8px 24px rgba(var(--mint-green-rgb), 0.25),
+        0 4px 12px rgba(var(--mint-green-rgb), 0.15);
+}
+
+.nav-content button:hover.recording,
+.nav-content button:hover.looping,
+.nav-content button:hover.has-recording {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.2),
+        0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .controls button {
-    padding: 10px 24px;
-    background: linear-gradient(135deg, #4a4a4a, #2c2c2c);
-    color: #fff;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-pink) 100%);
+    color: #ffffff;
     border: none;
-    border-radius: 999px;
+    border-radius: 50px;
     font-size: 14px;
-    letter-spacing: 0.08em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.3s ease, filter 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 4px 16px var(--shadow-medium),
+        0 2px 8px var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.nav-content button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(var(--mint-green-rgb), 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-content button:hover::before {
+    left: 100%;
+}
+
+.nav-content button:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 
+        0 2px 8px rgba(var(--mint-green-rgb), 0.2),
+        0 1px 4px rgba(var(--mint-green-rgb), 0.15);
+}
+
+.controls button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.controls button:hover::before {
+    left: 100%;
 }
 
 .controls button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    filter: brightness(1.05);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+        0 8px 24px var(--shadow-strong),
+        0 4px 12px var(--shadow-medium);
 }
 
 .controls button:active {
-    transform: translateY(0);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-    filter: brightness(0.95);
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 
+        0 2px 8px var(--shadow-medium),
+        0 1px 4px var(--shadow-soft);
+}
+
+.nav-content button:disabled,
+.controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.nav-content button:disabled:hover,
+.controls button:disabled:hover {
+    transform: none;
+    box-shadow: 
+        0 4px 16px var(--shadow-medium),
+        0 2px 8px var(--shadow-soft);
+}
+
+.nav-content #record-btn.recording {
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+    color: #ffffff;
+    border-color: #ff4444;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.nav-content .loop-btn.looping {
+    background: linear-gradient(135deg, #44ff44 0%, #00cc00 100%);
+    color: #ffffff;
+    border-color: #44ff44;
+}
+
+.nav-content .loop-btn.has-recording {
+    background: linear-gradient(135deg, #ffaa44 0%, #cc8800 100%);
+    color: #ffffff;
+    border-color: #ffaa44;
+}
+
+.loop-btn {
+    position: relative;
+}
+
+.loop-clear {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    font-size: 18px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    pointer-events: auto;
+    z-index: 10;
+}
+
+.loop-clear:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.2);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
 }
 
 .global-spotlight {
     position: fixed;
-    width: 760px;
-    height: 760px;
+    width: 800px;
+    height: 800px;
     border-radius: 50%;
     pointer-events: none;
     background: radial-gradient(
         circle,
-        rgba(var(--glow-color-rgb), 0.22) 0%,
-        rgba(var(--glow-color-rgb), 0.12) 25%,
-        rgba(var(--glow-color-rgb), 0.05) 50%,
-        rgba(var(--glow-color-rgb), 0.02) 65%,
-        transparent 75%
+        rgba(var(--glow-color-rgb), 0.18) 0%,
+        rgba(var(--glow-color-rgb), 0.1) 25%,
+        rgba(var(--glow-color-rgb), 0.04) 50%,
+        transparent 70%
     );
     mix-blend-mode: screen;
     z-index: 120;
     opacity: 0;
     transform: translate(-50%, -50%);
-    transition: opacity 0.2s ease;
-}
-
-h1 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 30px;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: blur(40px);
 }
 
 .xylophone-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 40px;
     margin: 0 auto;
     position: relative;
+    z-index: 2;
+    padding: 24px;
 }
 
 .xylophone-row {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .xylophone-key {
     width: 70px;
     height: 150px;
-    background: linear-gradient(160deg, #f6f6f6 0%, #e8e8e8 45%, #ffffff 100%);
-    border: 2px solid #d4d4d4;
-    border-radius: 35px;
-    box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.6), inset 0 -4px 8px rgba(0, 0, 0, 0.08);
+    background: 
+        linear-gradient(
+            to right,
+            #40ffaa,
+            #4079ff,
+            #40ffaa,
+            #4079ff,
+            #40ffaa
+        ),
+        linear-gradient(160deg, #ffffff 0%, #f8f9ff 45%, #ffffff 100%);
+    background-size: 300% 100%, 100% 100%;
+    background-blend-mode: overlay;
+    background-position: 0% 50%, 0% 0%;
+    border: 3px solid rgba(var(--glow-color-rgb), 0.25);
+    border-radius: 40px;
+    box-shadow: 
+        0 8px 24px rgba(132, 0, 255, 0.08),
+        0 4px 12px rgba(132, 0, 255, 0.04),
+        inset 0 2px 8px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 8px rgba(132, 0, 255, 0.05);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    font-weight: bold;
-    color: #444;
-    font-size: 20px;
+    gap: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 22px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     --glow-x: 50%;
     --glow-y: 50%;
     --glow-radius: 220px;
     --glow-intensity: 0;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%, 0% 0%;
+    }
+    50% {
+        background-position: 100% 50%, 0% 0%;
+    }
+    100% {
+        background-position: 0% 50%, 0% 0%;
+    }
 }
 
 .xylophone-key::after {
     content: attr(data-note);
-    font-size: 12px;
-    color: #666;
-    letter-spacing: 0.08em;
+    font-size: 11px;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 2;
+    font-weight: 500;
+    opacity: 0.7;
 }
 
 .xylophone-key::before {
     content: '';
     position: absolute;
-    inset: -8px;
+    inset: -12px;
     border-radius: inherit;
+    padding: 4px;
     background:
         radial-gradient(
             circle at var(--glow-x) var(--glow-y),
-            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.6)) 0%,
-            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.28)) 35%,
-            rgba(var(--glow-color-rgb), 0) 75%
+            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.95)) 0%,
+            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.75)) 20%,
+            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.5)) 40%,
+            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.25)) 60%,
+            rgba(var(--glow-color-rgb), 0) 80%
         );
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: subtract;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
     opacity: clamp(0, var(--glow-intensity), 1);
     pointer-events: none;
-    transition: opacity 0.25s ease;
-    z-index: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
 }
 
 .xylophone-key:hover {
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+    border-color: rgba(var(--glow-color-rgb), 0.5);
+    transform: translateY(-4px);
+    box-shadow: 
+        0 12px 32px rgba(132, 0, 255, 0.15),
+        0 6px 16px rgba(132, 0, 255, 0.1),
+        inset 0 2px 8px rgba(255, 255, 255, 0.9),
+        inset 0 -2px 8px rgba(132, 0, 255, 0.08);
 }
 
 .xylophone-key.playing {
-    transform: scale(1.05);
+    transform: scale(1.08) translateY(-6px);
+    border-color: rgba(var(--glow-color-rgb), 0.9);
     box-shadow:
-        0 0 32px rgba(var(--glow-color-rgb), 0.35),
-        0 16px 32px rgba(0, 0, 0, 0.32),
-        inset 0 0 18px rgba(var(--glow-color-rgb), 0.55);
+        0 0 40px rgba(var(--glow-color-rgb), 0.4),
+        0 0 60px rgba(var(--glow-color-rgb), 0.25),
+        0 20px 40px rgba(132, 0, 255, 0.2),
+        inset 0 0 20px rgba(var(--glow-color-rgb), 0.3);
+    animation: keyPress 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes keyPress {
+    0% {
+        transform: scale(1.08) translateY(-6px);
+    }
+    50% {
+        transform: scale(1.12) translateY(-8px);
+    }
+    100% {
+        transform: scale(1.08) translateY(-6px);
+    }
 }
 
 .xylophone-key.playing::before {
@@ -171,36 +454,150 @@ h1 {
 }
 
 .xylophone-key.playing::after {
-    color: rgba(50, 50, 50, 0.9);
+    color: var(--accent-purple);
+    opacity: 1;
+    font-weight: 600;
 }
 
 .xylophone-key--drum {
     width: 130px;
     height: 190px;
-    border-radius: 95px;
-    font-size: 26px;
-    background: linear-gradient(170deg, #3a3a3a 0%, #2b2b2b 60%, #1b1b1b 100%);
-    color: #f3f3f3;
-    border: 2px solid #121212;
-    box-shadow: inset 0 3px 8px rgba(255, 255, 255, 0.16), 0 12px 28px rgba(0, 0, 0, 0.35);
-    letter-spacing: 0.18em;
+    border-radius: 100px;
+    font-size: 28px;
+    background: 
+        linear-gradient(
+            to right,
+            #40ffaa,
+            #4079ff,
+            #40ffaa,
+            #4079ff,
+            #40ffaa
+        ),
+        var(--mint-green);
+    background-size: 300% 100%, 100% 100%;
+    background-blend-mode: overlay;
+    background-position: 0% 50%, 0% 0%;
+    color: var(--mint-green-dark);
+    border: 3px solid rgba(var(--mint-green-rgb), 0.8);
+    box-shadow: 
+        0 12px 32px rgba(var(--mint-green-rgb), 0.25),
+        0 6px 16px rgba(var(--mint-green-rgb), 0.2),
+        inset 0 4px 12px rgba(255, 255, 255, 0.6),
+        inset 0 -4px 12px rgba(var(--mint-green-rgb), 0.2);
+    letter-spacing: 0.2em;
     --glow-intensity: 0;
+    font-weight: 700;
 }
 
 .xylophone-key--drum::after {
-    font-size: 15px;
-    letter-spacing: 0.14em;
-    color: #d0d0d0;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--mint-green-dark);
+    font-weight: 500;
+    opacity: 0.8;
 }
 
 .xylophone-key--drum::before {
-    inset: -12px;
+    inset: -14px;
     background:
         radial-gradient(
             circle at var(--glow-x) var(--glow-y),
-            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.85)) 0%,
-            rgba(var(--glow-color-rgb), calc(var(--glow-intensity) * 0.4)) 35%,
-            rgba(var(--glow-color-rgb), 0) 78%
+            rgba(var(--mint-green-rgb), calc(var(--glow-intensity) * 0.95)) 0%,
+            rgba(var(--mint-green-rgb), calc(var(--glow-intensity) * 0.7)) 25%,
+            rgba(var(--mint-green-rgb), calc(var(--glow-intensity) * 0.4)) 50%,
+            rgba(var(--mint-green-rgb), 0) 78%
         );
 }
 
+.xylophone-key--drum:hover {
+    border-color: rgba(var(--mint-green-rgb), 0.9);
+    transform: translateY(-6px);
+    box-shadow: 
+        0 16px 40px rgba(var(--mint-green-rgb), 0.3),
+        0 8px 20px rgba(var(--mint-green-rgb), 0.25),
+        inset 0 4px 12px rgba(255, 255, 255, 0.9),
+        inset 0 -4px 12px rgba(var(--mint-green-rgb), 0.15);
+}
+
+.xylophone-key--drum.playing {
+    transform: scale(1.1) translateY(-8px);
+    border-color: rgba(var(--mint-green-rgb), 1);
+    box-shadow:
+        0 0 50px rgba(var(--mint-green-rgb), 0.6),
+        0 0 80px rgba(var(--mint-green-rgb), 0.4),
+        0 24px 48px rgba(var(--mint-green-rgb), 0.35),
+        inset 0 0 24px rgba(var(--mint-green-rgb), 0.4);
+    animation: drumPress 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes drumPress {
+    0% {
+        transform: scale(1.1) translateY(-8px);
+    }
+    50% {
+        transform: scale(1.15) translateY(-10px);
+    }
+    100% {
+        transform: scale(1.1) translateY(-8px);
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    .nav-bar {
+        padding: 0;
+    }
+    
+    .nav-content {
+        padding: 12px 16px;
+        gap: 10px;
+    }
+    
+    .nav-content #sound-toggle {
+        margin-right: 20px;
+    }
+    
+    .nav-content button {
+        padding: 10px 18px;
+        font-size: 12px;
+    }
+    
+    .container {
+        padding: 24px 16px;
+    }
+    
+    .xylophone-container {
+        gap: 28px;
+        padding: 16px;
+    }
+    
+    .xylophone-row {
+        gap: 12px;
+    }
+    
+    .xylophone-key {
+        width: 60px;
+        height: 130px;
+        font-size: 18px;
+    }
+    
+    .xylophone-key--drum {
+        width: 110px;
+        height: 160px;
+        font-size: 24px;
+    }
+    
+    .controls {
+        margin-bottom: 32px;
+    }
+    
+    .controls button {
+        padding: 12px 24px;
+        font-size: 13px;
+    }
+}
